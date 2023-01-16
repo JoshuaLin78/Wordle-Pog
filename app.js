@@ -13,12 +13,16 @@ const wordLength = 5;
 const FLIP_ANIMATION_DURATION = 500;
 let correctWord;
 
+const winPopup = document.getElementById("win-popup");
+const losePopup = document.getElementById("lose-popup");
+
 function getWordle(){                                           //Fetches a random 5 letter word using an API
     fetch('http://localhost:8000/word')
         .then(response => response.json())
         .then(json => {
             console.log(json);
             correctWord = json.toUpperCase();
+            document.getElementById('answer-display').InnerHTML = "The answer was: " + correctWord;
         })
         .catch(err => console.log(err))
 }
@@ -33,6 +37,38 @@ function stopInteraction(){                                     //Stops user int
     document.removeEventListener("keydown", keyPress);
 }
 
+function stopKeyboard(){
+    document.removeEventListener("keydown", keyPress);
+}
+
+function startKeyboard(){
+    document.addEventListener("keydown", keyPress);
+}
+
+function playAgain(){
+    console.log("Play Again");
+    closeWinPopup();
+    const allTiles = [...getAllTiles()];
+    const allKeys = [...getAllKeys()];
+    for(let k = 0; k<allTiles.length; k++){
+        delete allTiles[k].dataset.state;
+        delete allTiles[k].dataset.letter;
+        allTiles[k].textContent = "";
+    }
+    for(let k = 0; k<allKeys.length; k++){
+        allKeys[k].classList.remove("correct");
+        allKeys[k].classList.remove("wrong-location");
+        allKeys[k].classList.remove("wrong");
+    }
+    keyboard.classList.remove("disabled");
+    startKeyboard();
+    getWordle();
+    timerON = false;
+    minutes = 0;
+    sec = 0;
+    ele.innerHTML = minutes + ':' + sec.toString().padStart(2, '0');
+}
+
 function startTimer(){
     timer = setInterval(()=>{
         ele.innerHTML = minutes + ':' + sec.toString().padStart(2, '0');
@@ -43,6 +79,22 @@ function startTimer(){
             minutes++;
         }
     }, 1000);
+}
+
+function openWinPopup(){
+    winPopup.classList.add("open-popup");
+}
+
+function closeWinPopup(){
+    winPopup.classList.remove("open-popup");
+}
+
+function openLosePopup(){
+    losePopup.classList.add("open-popup");
+}
+
+function closeLosePopup(){
+    losePopup.classList.remove("open-popup");
 }
 
 function mouseClick(e){                                         //Handles user mouse clicks
@@ -98,6 +150,14 @@ function printKey(key){                                              //Prints us
 
 function getActiveTiles(){                                           //Function for returning the tiles that currently have letters in them
     return guessGrid.querySelectorAll('[data-state="active"]');
+}
+
+function getAllTiles(){
+    return guessGrid.querySelectorAll(".tile");
+}
+
+function getAllKeys(){
+    return keyboard.querySelectorAll(".key");
 }
 
 function deleteKey(){                                               //Function for deleting keys when user hits backspace
@@ -172,14 +232,18 @@ function flipTile(tile, index, array, guess){
 function checkWinLose(guess, tiles){
     if(guess.toUpperCase() === correctWord){                                    //If submitted guess matches with the correct word, they win
         clearInterval(timer);
-        stopInteraction();
+        openWinPopup();
+        stopKeyboard();
+        keyboard.classList.add("disabled");
         return;
     }
     
     const remainingTiles = guessGrid.querySelectorAll(":not([data-letter])");   //If user has already submitted 6 guesses, then they lose
     if(remainingTiles === 0){
         clearInterval(timer);
-        stopInteraction();
+        openLosePopup();
+        stopKeyboard();
+        keyboard.classList.add("disabled");
         return;
     }
 }
