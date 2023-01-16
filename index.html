@@ -9,6 +9,17 @@
     <title>Wordle Pog</title>
 </head>
 <body>
+    <div class="popup" id="win-popup">
+        <h2>You Win!</h2>
+        <p>Poggers</p>
+        <button type="button" onclick="playAgain()">Play Again</button>
+    </div>
+    <div class="popup" id="lose-popup">
+        <h2>You Lose :(</h2>
+        <p>Not poggers</p>
+        <p id="answer-display">The word was: </p>
+        <button type="button" onclick="playAgain()">Play Again</button>
+    </div>
     <h1 id="title">Wordle Pog</h1>
     <div id = "js_timer">
         <div id = "timer">
