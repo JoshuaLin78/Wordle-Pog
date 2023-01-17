@@ -17,6 +17,7 @@ const keyboard = document.querySelector("[data-keyboard]");
 const winPopup = document.getElementById("win-popup");
 const losePopup = document.getElementById("lose-popup");
 const challengePopup = document.getElementById("challenge-popup");
+const instructionsPopup = document.getElementById("instructions-popup");
 const answerDisplay = document.getElementById("answer-display");
 
 startInteraction();
@@ -99,6 +100,17 @@ function closeChallengePopup(){
     keyboard.classList.remove("disabled");
 }
 
+function openInstructionsPopup(){
+    instructionsPopup.classList.add("open-popup");
+    stopKeyboard();
+    keyboard.classList.add("disabled");
+}
+
+function closeInstructionsPopup(){
+    instructionsPopup.classList.remove("open-popup");
+    startKeyboard();
+    keyboard.classList.remove("disabled");
+}
 function getActiveTiles(){                                           //Function for returning the tiles that currently have letters in them
     return guessGrid.querySelectorAll('[data-state="active"]');
 }
@@ -286,7 +298,6 @@ function flipTile(tile, index, array, guess){
     }, index *  FLIP_ANIMATION_DURATION /2);
 
     console.log(a + " " + letterMap.get(a));
-    console.log(letterMap.get(a) !== 0);
 
     tile.addEventListener("transitionend", () => {                  //When flip animation ends, remove the flip animation state
         tile.classList.remove("flip");
@@ -296,12 +307,12 @@ function flipTile(tile, index, array, guess){
             let temp = letterMap.get(letter) - 1;
             letterMap.set(letter, temp)
             console.log(letter + " " + letterMap.get(a));
-        }else if(correctWord.includes(letter) && letterMap.get(a) !== 0){
+        }else if(correctWord.includes(letter) && letterMap.get(letter) !== 0){
             tile.dataset.state = "wrong-location";
             key.classList.add("wrong-location");
             let temp = letterMap.get(letter) - 1;
             letterMap.set(letter, temp)
-            console.log(letter + " " + letterMap.get(a));
+            console.log(letter + " " + letterMap.get(letter));
         }else{                                                      //If not, then the letter is not in the word
             tile.dataset.state = "wrong";
             key.classList.add("wrong");
@@ -324,7 +335,6 @@ function checkWinLose(guess, tiles){
     }
     
     const remainingTiles = guessGrid.querySelectorAll(":not([data-letter])");   //If user has already submitted 6 guesses, then they lose
-    console.log(remainingTiles);
     if(remainingTiles.length === 0){
         openLosePopup();
         return;
