@@ -9,23 +9,11 @@
     <title>Wordle Pog</title>
 </head>
 <body>
-    <div class="popup" id="win-popup">
-        <h2>You Win!</h2>
-        <p>Poggers</p>
-        <button type="button" onclick="playAgain()">Play Again</button>
-    </div>
-    <div class="popup" id="lose-popup">
-        <h2>You Lose :(</h2>
-        <p>Not poggers</p>
-        <p id="answer-display">The word was: </p>
-        <button type="button" onclick="playAgain()">Play Again</button>
-    </div>
     <h1 id="title">Wordle Pog</h1>
     <div id = "js_timer">
         <div id = "timer">
             0:00
         </div>
-    </div>
     </div>
     <div data-guess-grid class="guess-grid">
         <div class="tile"></div>
@@ -58,6 +46,25 @@
         <div class="tile"></div>
         <div class="tile"></div>
         <div class="tile"></div>
+    </div>
+    <button class ="challengeButton" type="button" onclick="openChallengePopup()">Challenges</button>
+    <div class="popup" id="win-popup">
+        <h2>You Win!</h2>
+        <p>Poggers</p>
+        <button type="button" onclick="playAgain()">Play Again</button>
+    </div>
+    <div class="popup" id="lose-popup">
+        <h2>You Lose :(</h2>
+        <p>Not poggers</p>
+        <p id="answer-display"></p>
+        <button type="button" onclick="playAgain()">Play Again</button>
+    </div>
+    <div class="popup" id="challenge-popup">
+        <h2>Challenge</h2>
+        <p>Complete a wordle in just 30 seconds >:)</p>
+        <button type="button" onclick="startChallenge(), closeChallengePopup()">Lesago</button>
+        <button type="button" onclick="closeChallengePopup()">Naur</button>
+    </div>
     </div>
     <div data-keyboard class="keyboard">
         <button class="key" data-key="Q">Q</button> <! class for styling, data attribute for JS, text "Q" >
