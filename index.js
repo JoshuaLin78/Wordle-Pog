@@ -9,14 +9,14 @@ app.use(cors());
 app.get('/word', (req, res) =>{                                                     //API request for retrieving a random word
     
     const options = {
-    method: 'GET',
-    url: 'https://random-words5.p.rapidapi.com/getMultipleRandom',
-    params: {count: '1', wordLength: '5'},
-    headers: {
-        'X-RapidAPI-Key': '07a6470341msh12490ac7802a581p15745ajsn077fbe14954a',
-        'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
-    }
-    };
+        method: 'GET',
+        url: 'https://random-words5.p.rapidapi.com/getMultipleRandom',
+        params: {count: '1', wordLength: '5'},
+        headers: {
+          'X-RapidAPI-Key': 'cce7031bb2mshd7bbc8eb567bc2ep142c54jsn05658ee5d167',
+          'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
+        }
+      };
 
     axios.request(options).then((response) =>{
         console.log(response.data);
