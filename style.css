@@ -38,7 +38,7 @@ body{
     gap: .25em;
     justify-content: center;
     position: relative;
-    top: -40px;
+    top: -20px;
 }
 
 .key{
@@ -92,6 +92,9 @@ body{
     --lightness: 43%;
 }
 
+svg{
+    pointer-events: none;
+}
 .guess-grid{
     display: grid;
     justify-content: center;
@@ -142,8 +145,8 @@ body{
 }
 
 .popup{
-    width: 25%;
-    height: 28%;
+    width: 13em;
+    height: 13em;
     background: white;
     border-radius: 6px;
     justify-content: center;
@@ -166,17 +169,39 @@ body{
 }
 
 .popup button{
-    width: 100%;
-    margin-top: 50px;
+    width: 9em;
+    margin-top: 0.4em;
     padding: 10px 0;
     background: green;
     color: white;
     border: 0;
     outline: none;
-    font-size: 18px;
+    font-size: 1em;
     border-radius: 4px;
     cursor: pointer;
-    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 0.1em 0.1em rgba(0,0,0,0.2);
+}
+
+.challengeButton{
+    width: 9em;
+    height: 2.1em;
+    margin-top: 0.7em;
+    padding: 10px 0;
+    background: white;
+    color: black;
+    border: 0;
+    outline: none;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: -18.5em;
+    z-index: 1;
 }
 
 .disabled{
