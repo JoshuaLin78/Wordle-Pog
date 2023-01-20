@@ -1,3 +1,11 @@
+/*
+===================================================================================================================================
+Wordle Pog - style.css
+Authors: Joshua Lin, Ethan Leung
+Date: 01/19/2023
+JavaScript, VS Code
+===================================================================================================================================
+*/
 *, *::after, *::before{
     box-sizing: border-box;
     font-family: Arial;
@@ -17,20 +25,10 @@
     margin: auto;
     position: absolute;
     top: -3em;
-    left: -46em;
+    left: -52em;
     right: 0;
     bottom: 0;
     z-index: 1;
-}
-
-body{
-    background-color: hsl(240, 3%, 7%);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    margin: 0;
-    padding: 1em;
-    font-size: clamp(.5rem, 2.5vmin, 1.5rem); /*Keeps font size relative to window size*/
 }
 
 #js_timer{
@@ -44,6 +42,17 @@ body{
     top: -10px;
     
 }
+
+body{
+    background-color: hsl(240, 3%, 7%);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 1em;
+    font-size: clamp(.5rem, 2.5vmin, 1.5rem); /*Keeps font size relative to window size*/
+}
+
 .keyboard{
     display: grid;
     grid-template-columns: repeat(20, minmax(auto, 1em));
@@ -182,7 +191,7 @@ svg{
 }
 
 .popup button{
-    width: 9.5em;
+    width: 11em;
     margin-top: 0.4em;
     padding: 10px 0;
     background: green;
