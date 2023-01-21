@@ -5,6 +5,7 @@
 //JavaScript, VS Code
 //===================================================================================================================================
 
+//Variables for setting up a simple server using the Express library in Node.js (import axios, express and cors)
 const PORT = 8000;
 const axios = require("axios");
 const express = require("express");
@@ -13,11 +14,13 @@ const app = express();
 
 app.use(cors());
 
-app.get('/word', (req, res) =>{                                                     //API request for retrieving a random word
+//API request for retrieving a random word
+app.get('/word', (req, res) =>{                                                     
     
     const options = {
         method: 'GET',
         url: 'https://random-words5.p.rapidapi.com/getMultipleRandom',
+        //1 word, 5 letters long
         params: {count: '1', wordLength: '5'},
         headers: {
           'X-RapidAPI-Key': 'cce7031bb2mshd7bbc8eb567bc2ep142c54jsn05658ee5d167',
@@ -33,7 +36,8 @@ app.get('/word', (req, res) =>{                                                 
     });
 });
 
-app.get('/check', (req, res) =>{                                                //API request that sends a query to check if its in the dictionary
+//API request that sends a query to check if its in the dictionary
+app.get('/check', (req, res) =>{                                                
     const word = req.query.word;
 
     const options = {
@@ -53,5 +57,6 @@ app.get('/check', (req, res) =>{                                                
         console.error(error);
     });
 });
-    
+
+//Once server starts running, let the dev know on the console
 app.listen(PORT, () => console.log('Server running on port ' + PORT));
